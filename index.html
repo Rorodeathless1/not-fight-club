@@ -11,7 +11,7 @@
 
 <body>
 
-  <div class="registration active">
+  <form class="registration active">
     <h1 class="registration-title">
       Welcome warrior!
     </h1>
@@ -20,16 +20,16 @@
       name
     </span>
 
-    <input type="text" class="registration-input">
+    <input required type="text" class="registration-input" name="name">
 
-    <button class="registration-button">
+    <button class="registration-button" type="submit">
       go
     </button>
-  </div>
+  </form>
 
 
 
-  <div class="cap">
+  <div class="cap active">
     <div class="cap-svg">
 
       <svg class="cap-svg-home" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@
         <line x1="12" y1="15" x2="16" y2="20" stroke="currentColor" stroke-width="1.5" />
       </svg>
 
-      <svg class="cap-svg-seting" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg class="cap-svg-setings" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2L15 9L22 9L16 14L18 21L12 17L6 21L8 14L2 9L9 9Z" fill="none" stroke="currentColor"
           stroke-width="1.5" stroke-linejoin="round" />
       </svg>
@@ -68,24 +68,31 @@
       <span class="profile-status-wins">Wins:<span class="profile-status-wins-count""> 0</span></span>
       <span class=" profile-status-loses">Loses:<span class="profile-status-loses-count"> 0</span></span>
 
-        <button class="profile-status-edit">Edit</button>
+
     </div>
 
     <div class="profile-hero">
-      <img src="/src/assets/img/poni.webp" alt="poni">
+      <img id="hero-avatar" src="/src/assets/img/poni.webp" alt="poni">
     </div>
 
     <button class="profile-button-hero">replace the hero</button>
 
-    <div class="profile-person active">
-      <img src="/src/assets/img/poni.webp" alt="poni">
-      <img src="/src/assets/img/goku.jpg" alt="goku">
-      <img src="/src/assets/img/itachi.jpg" alt="itachi">
-      <img src="/src/assets/img/saitama.webp" alt="saitama">
+    <div class="profile-person">
+      <img class="profile-hero-1" src="/src/assets/img/poni.webp" alt="poni">
+      <img class="profile-hero-2" src="/src/assets/img/goku.jpg" alt="goku">
+      <img class="profile-hero-3" src="/src/assets/img/itachi.jpg" alt="itachi">
+      <img class="profile-hero-4" src="/src/assets/img/saitama.webp" alt="saitama">
     </div>
 
   </div>
 
+  <div class="configure">
+    <span class="profile-status-name">xx</span>
+    <input type="text" required name="name">
+    <button class="profile-status-edit">Edit</button>
+  </div>
+
+  <script src="/src/js/script.js"></script>
 </body>
 
 </html>
