@@ -5,6 +5,7 @@ const editNameButton = document.querySelector('.profile-status-edit');
 
 let userName = '';
 let isEdited = false;
+let enemy = '';
 
 registrationButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -36,51 +37,60 @@ editNameButton.addEventListener('click', () => {
   }
 })
 
-const homePage = document.querySelector('.cap-svg-home');
-const profilePage = document.querySelector('.cap-svg-profile');
-const settingsPage = document.querySelector('.cap-svg-setings');
+const homePageBtn = document.querySelector('.cap-svg-home');
+const profilePageBtn = document.querySelector('.cap-svg-profile');
+const settingsPageBtn = document.querySelector('.cap-svg-setings');
 
-
-homePage.addEventListener('click', () => {
-  homePage.classList.add('active');
-  profilePage.classList.remove('active');
-  settingsPage.classList.remove('active');
-  document.querySelector('.home').classList.add('active');
-  document.querySelector('.profile').classList.remove('active');
-  document.querySelector('.configure').classList.remove('active');
-});
-
-profilePage.addEventListener('click', () => {
-  profilePage.classList.add('active');
-  homePage.classList.remove('active');
-  settingsPage.classList.remove('active');
-  document.querySelector('.profile').classList.add('active');
-  document.querySelector('.home').classList.remove('active');
-  document.querySelector('.configure').classList.remove('active');
-});
-
-settingsPage.addEventListener('click', () => {
-  settingsPage.classList.add('active');
-  homePage.classList.remove('active');
-  profilePage.classList.remove('active');
-  document.querySelector('.configure').classList.add('active');
-  document.querySelector('.home').classList.remove('active');
-  document.querySelector('.profile').classList.remove('active');
-});
-
-
+const homePage = document.querySelector('.home');
+const profilePage = document.querySelector('.profile');
+const settingsPage = document.querySelector('.configure');
 const profileButtonHero = document.querySelector('.profile-button-hero');
 const profileHeroes = document.querySelector('.profile-person');
 const userAvatar = document.querySelector('#hero-avatar');
+const fightPage = document.querySelector('.fight');
+const enemyInputs = document.querySelectorAll('.home-container input');
+const enemyBtn = document.querySelector('.home-button');
+
+homePageBtn.addEventListener('click', () => {
+  homePage.classList.add('active');
+  profilePage.classList.remove('active');
+  settingsPage.classList.remove('active');
+  fightPage.classList.remove('active');
+});
+
+profilePageBtn.addEventListener('click', () => {
+  profilePage.classList.add('active');
+  homePage.classList.remove('active');
+  settingsPage.classList.remove('active');
+  fightPage.classList.remove('active');
+});
+
+settingsPageBtn.addEventListener('click', () => {
+  settingsPage.classList.add('active');
+  homePage.classList.remove('active');
+  profilePage.classList.remove('active');
+  fightPage.classList.remove('active');
+});
 
 profileButtonHero.addEventListener('click', () => {
   profileHeroes.classList.toggle('active');
 });
 
-  const heroesArr = profileHeroes.querySelectorAll('img');
-
-  heroesArr.forEach((hero) => {
-    hero.addEventListener('click', () => {
-      userAvatar.src = hero.src;
-    });
+const heroesArr = profileHeroes.querySelectorAll('img');
+heroesArr.forEach((hero) => {
+  hero.addEventListener('click', () => {
+    userAvatar.src = hero.src;
   });
+});
+
+enemyInputs.forEach((input) => {
+  input.addEventListener('click', () => {
+    enemy = `/src/assets/img/${input.id}.jpg`;
+  });
+});
+
+enemyBtn.addEventListener('click', () => {
+  homePage.classList.remove('active');
+  fightPage.classList.add('active');
+});
+
