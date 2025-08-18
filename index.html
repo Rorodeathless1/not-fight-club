@@ -29,7 +29,7 @@
 
 
 
-  <div class="cap active">
+  <div class="cap">
     <div class="cap-svg">
 
       <svg class="cap-svg-home" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -58,11 +58,30 @@
     </div>
   </div>
 
-  <div class="home">
+  <div class="home indentation">
+    <div class="home-container">
+      <label for="ice">
+        <input checked type="radio" name="hero" id="ice">
+        <img src="/src/assets/img/ice.jpg" alt="ice">
+
+      </label>
+
+      <label for="stormi">
+        <input type="radio" name="hero" id="stormi">
+        <img src="/src/assets/img/stormi.png" alt="stormi">
+
+      </label>
+
+      <label for="darci">
+        <input type="radio" name="hero" id="darci">
+        <img src="/src/assets/img/darci.jpg" alt="darci">
+
+      </label>
+    </div>
     <button class="home-button">start</button>
   </div>
 
-  <div class="profile">
+  <div class="profile indentation">
     <div class="profile-status">
       <span class="profile-status-name">xx</span>
       <span class="profile-status-wins">Wins:<span class="profile-status-wins-count""> 0</span></span>
@@ -86,10 +105,14 @@
 
   </div>
 
-  <div class="configure">
-    <span class="profile-status-name">xx</span>
-    <input type="text" required name="name">
+  <div class="configure indentation">
+    <span class="profile-status-name configure-name active">xx</span>
+    <input class="configure-content" type="text" required name="name">
     <button class="profile-status-edit">Edit</button>
+  </div>
+
+  <div class="fight">
+
   </div>
 
   <script src="/src/js/script.js"></script>

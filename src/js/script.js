@@ -1,33 +1,40 @@
 const registrationForm = document.querySelector('.registration');
 const registrationNameInput = registrationForm.name;
 const registrationButton = document.querySelector('.registration-button');
+const editNameButton = document.querySelector('.profile-status-edit');
 
 let userName = '';
+let isEdited = false;
 
 registrationButton.addEventListener('click', (e) => {
   e.preventDefault();
   userName = registrationNameInput.value;
   registrationForm.classList.remove('active');
   document.querySelector('.profile').classList.add('active');
-  document.querySelector('.profile-status-name').textContent = userName;
+  document.querySelectorAll('.profile-status-name').forEach((name) => name.textContent = userName);
+  document.querySelector('.cap').classList.add('active');
 });
 
-const profileButtonHero = document.querySelector('.profile-button-hero');
-const profileHeroes = document.querySelector('.profile-person');
-const userAvatar = document.querySelector('#hero-avatar');
+editNameButton.addEventListener('click', () => {
+  const input = document.querySelector('.configure-content');
+  const nameContainers = document.querySelectorAll('.profile-status-name');
+  const nameContainer = document.querySelector('.configure-name');
+  if (isEdited && input.value && input.value.trim() !== '') {
+    editNameButton.textContent = 'Edit';
+    input.classList.remove('active');
+    nameContainer.classList.add('active');
+    nameContainers.forEach((name) => name.textContent = input.value);
+    isEdited = false;
 
-profileButtonHero.addEventListener('click', () => {
-  profileHeroes.classList.toggle('active');
-});
+  } else if (!isEdited) {
+    editNameButton.textContent = 'Save';
+    input.value = nameContainer.textContent;
+    input.classList.add('active');
+    nameContainer.classList.remove('active');
 
-  const heroesArr = profileHeroes.querySelectorAll('img');
-
-  heroesArr.forEach((hero) => {
-    hero.addEventListener('click', () => {
-      userAvatar.src = hero.src;
-    });
-  });
-
+    isEdited = true;
+  }
+})
 
 const homePage = document.querySelector('.cap-svg-home');
 const profilePage = document.querySelector('.cap-svg-profile');
@@ -60,3 +67,20 @@ settingsPage.addEventListener('click', () => {
   document.querySelector('.home').classList.remove('active');
   document.querySelector('.profile').classList.remove('active');
 });
+
+
+const profileButtonHero = document.querySelector('.profile-button-hero');
+const profileHeroes = document.querySelector('.profile-person');
+const userAvatar = document.querySelector('#hero-avatar');
+
+profileButtonHero.addEventListener('click', () => {
+  profileHeroes.classList.toggle('active');
+});
+
+  const heroesArr = profileHeroes.querySelectorAll('img');
+
+  heroesArr.forEach((hero) => {
+    hero.addEventListener('click', () => {
+      userAvatar.src = hero.src;
+    });
+  });

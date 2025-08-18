@@ -1,3 +1,7 @@
+.indentation {
+  padding-top: 100px;
+}
+
 .registration {
   display: none;
   flex-direction: column;
@@ -66,8 +70,21 @@
   justify-content: center;
   height: 100vh;
   background-color: #f2f2f2;
+  gap: 50px;
   &.active {
     display: flex;
+  }
+
+  &-container {
+    display: flex;
+    gap: 20px;
+
+    input:checked + img {
+      border: 5px solid #4CAF50;
+    }
+    input[type="radio"] {
+      display: none;
+    }
   }
 
   &-button {
@@ -144,12 +161,24 @@
 }
 
 .configure {
+  margin: 25px;
   display: none;
-  flex-direction: column;
   align-items: center;
   gap: 30px;
   &.active {
     display: flex;
+  }
+  &-content {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+  &-name {
+    display: none;
+    &.active {
+      display: block;
+    }
   }
 }
 
