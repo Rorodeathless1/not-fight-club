@@ -68,7 +68,7 @@
 
       <label for="stormi">
         <input type="radio" name="hero" id="stormi">
-        <img src="/src/assets/img/stormi.png" alt="stormi">
+        <img src="/src/assets/img/stormi.jpg" alt="stormi">
 
       </label>
 
@@ -111,43 +111,50 @@
     <button class="profile-status-edit">Edit</button>
   </div>
 
-  <div class="fight indentation active">
+
+  <div class="fight-container">
     <div class="fight-hero">
+      <span class="fight-hero-name">hero</span>
       <img src="/src/assets/img/poni.webp" alt="poni">
-      <div>XP</div>
+      <div id="hero-hp">HP: 5</div>
     </div>
 
     <div class="fight-content">
       <div class="fight-actions">
         <div class="fight-attack properties">
-          <span>точки атаки (1 точка для атаки)</span>
+          <span>Attack Point (Select 1)</span>
           <div class="fight-attack-content">
-            <span>голова<input type="radio"></span>
-            <span>тело<input type="radio"></span>
-            <span>ноги<input type="radio"></span>
+            <span>Head<input type="radio" name="hero-attack" value="head"></span>
+            <span>Body<input type="radio" name="hero-attack" value="body"></span>
+            <span>Legs<input type="radio" name="hero-attack" value="legs"></span>
           </div>
         </div>
         <div class="fight-defence properties">
-          <span>точки защиты (2 точки для защиты)</span>
+          <span>Defense Points (Select 2)</span>
           <div class="fight-attack-content">
-            <span>голова<input type="radio"></span>
-            <span>тело<input type="radio"></span>
-            <span>ноги<input type="radio"></span>
+            <span>Head <input type="checkbox" name="hero-defence" value="head"></span>
+            <span>Body <input type="checkbox" name="hero-defence" value="body"></span>
+            <span>Legs <input type="checkbox" name="hero-defence" value="legs"></span>
           </div>
         </div>
       </div>
-      <button class="fight-button">fight</button>
+      <button id="fight-button" class="fight-button" disabled>Fight!</button>
+      <button id="reset-button" class="fight-button hidden">Reset</button>
     </div>
 
-
-
     <div class="fight-enemy">
+      <span class="fight-enemy-name">ice</span>
       <img src="/src/assets/img/ice.jpg" alt="ice">
-      <div>XP</div>
+      <div id="enemy-hp">HP: 5</div>
     </div>
   </div>
 
-  <script src="/src/js/script.js"></script>
+  <div id="log-container" class="log-container">
+    <h3>Battle log</h3>
+    <ul id="battle-log"></ul>
+  </div>
+
+  <script src="/src/js/script.js" defer></script>
 </body>
 
 </html>
