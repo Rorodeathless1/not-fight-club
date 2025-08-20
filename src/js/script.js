@@ -109,6 +109,7 @@ enemyBtn.addEventListener('click', () => {
   logContainer.classList.add('active');
   document.querySelector('.fight-enemy img').src = `/src/assets/img/${enemy}.jpg`;
   document.querySelector('.fight-enemy-name').textContent = enemy
+  resetFight();
 });
 
 
@@ -176,9 +177,6 @@ function fight() {
   const heroAttack = document.querySelector('input[name="hero-attack"]:checked').value;
   const heroDefence = Array.from(document.querySelectorAll('input[name="hero-defence"]:checked')).map(el => el.value);
   const enemyActions = getEnemyActions();
-  const heroDamage = 0;
-  const enemyDamage = 0;
-
 
   logAction('--- New round ---', ''); 
 
@@ -227,7 +225,25 @@ enemyAttacks.forEach(enemyAttackZone => {
   updateFightButton();
 }
 
-// function resetFight() 
+function resetFight() {
+  heroHp = 5;
+  enemyHp = 5;
+  
+  heroHpEl.textContent = `HP: ${heroHp}`;
+  enemyHpEl.textContent = `HP: ${enemyHp}`;
+
+  battleLog.innerHTML = '';
+  
+  fightButton.disabled = false;
+
+  attackInputs.forEach(input => input.checked = false);
+  defenceInputs.forEach(input => input.checked = false);
+  
+  updateFightButton();
+  
+  logAction('--- New game ---', 'end-game');
+}
+
 
 function translateZone(zone) {
   const translations = {
@@ -240,3 +256,5 @@ function translateZone(zone) {
 
 fightButton.addEventListener('click', fight);
 updateFightButton(); 
+resetButton.addEventListener('click', resetFight);
+updateFightButton();
