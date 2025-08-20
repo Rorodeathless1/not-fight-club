@@ -48,10 +48,9 @@ function checkedRegistration() {
     capHeader.classList.add('active');
     userAvatar.src = hero;
     heroAvatar.src = hero;
-    loseContainer.textContent = loseCounter;
-    winContainer.textContent = winCounter;
-
   }
+  loseContainer.textContent = loseCounter;
+  winContainer.textContent = winCounter;
 }
 
 checkedRegistration();
