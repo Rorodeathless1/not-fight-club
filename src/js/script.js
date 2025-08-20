@@ -131,7 +131,7 @@ enemyBtn.addEventListener('click', () => {
   homePage.classList.remove('active');
   fightPage.classList.add('active');
   logContainer.classList.add('active');
-  document.querySelector('.fight-enemy img').src = `/src/assets/img/${enemy}.jpg`;
+  document.querySelector('.fight-enemy img').src = `src/assets/img/${enemy}.jpg`;
   document.querySelector('.fight-enemy-name').textContent = enemy
   resetFight();
 });
