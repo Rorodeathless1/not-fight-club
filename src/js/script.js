@@ -48,10 +48,9 @@ function checkedRegistration() {
     capHeader.classList.add('active');
     userAvatar.src = hero;
     heroAvatar.src = hero;
-    loseContainer.textContent = loseCounter;
-    winContainer.textContent = winCounter;
-
   }
+  loseContainer.textContent = loseCounter;
+  winContainer.textContent = winCounter;
 }
 
 checkedRegistration();
@@ -131,7 +130,7 @@ enemyBtn.addEventListener('click', () => {
   homePage.classList.remove('active');
   fightPage.classList.add('active');
   logContainer.classList.add('active');
-  document.querySelector('.fight-enemy img').src = `/src/assets/img/${enemy}.jpg`;
+  document.querySelector('.fight-enemy img').src = `src/assets/img/${enemy}.jpg`;
   document.querySelector('.fight-enemy-name').textContent = enemy
   resetFight();
 });
