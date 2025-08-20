@@ -207,17 +207,17 @@ function fight() {
 if (typeof enemyActions.defence === 'string') {
     if (heroAttack !== enemyActions.defence) {
         enemyHp -= damage;
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${damage} damage.`, 'hero-action');
+        logAction(`HERO attacked the ENEMY in ${heroAttack} and applied ${damage} damage.`, 'hero-action');
     } else {
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
+        logAction(`HERO attacked the ENEMY in ${heroAttack}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
     }
 } else {
     
     if (!enemyActions.defence.includes(heroAttack)) {
         enemyHp -= damage;
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${damage} damage.`, 'hero-action');
+        logAction(`HERO attacked the ENEMY in ${heroAttack} and applied ${damage} damage.`, 'hero-action');
     } else {
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
+        logAction(`HERO attacked the ENEMY in ${heroAttack}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
     }
 }
 
@@ -225,9 +225,9 @@ const enemyAttacks = Array.isArray(enemyActions.attack) ? enemyActions.attack : 
 enemyAttacks.forEach(enemyAttackZone => {
     if (!heroDefence.includes(enemyAttackZone)) {
         heroHp -= damage;
-        logAction(`The ENEMY attacked the HERO in ${translateZone(enemyAttackZone)} and applied ${damage} damage.`, 'enemy-action');
+        logAction(`The ENEMY attacked the HERO in ${enemyAttackZone} and applied ${damage} damage.`, 'enemy-action');
     } else {
-        logAction(`The ENEMY attacked the HERO in ${translateZone(enemyAttackZone)}, but the HERO protected this area. Damage: 0.`, 'enemy-action');
+        logAction(`The ENEMY attacked the HERO in ${enemyAttackZone}, but the HERO protected this area. Damage: 0.`, 'enemy-action');
     }
 });
 
