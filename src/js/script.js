@@ -3,27 +3,53 @@ const registrationNameInput = registrationForm.name;
 const registrationButton = document.querySelector('.registration-button');
 const editNameButton = document.querySelector('.profile-status-edit');
 const profileHeroes = document.querySelector('.profile-person');
+const nameContainers =  document.querySelectorAll('.profile-status-name');
 
 const heroesArr = profileHeroes.querySelectorAll('img');
 const userAvatar = document.querySelector('#hero-avatar');
 
-let userName = localStorage.getItem('userName-roro') ? localStorage.getItem('userName-roro') : '';
+const capHeader = document.querySelector('.cap');
+const homePageBtn = document.querySelector('.cap-svg-home');
+const profilePageBtn = document.querySelector('.cap-svg-profile');
+const settingsPageBtn = document.querySelector('.cap-svg-setings');
+
+const pages = document.querySelectorAll('.indentation');
+const homePage = document.querySelector('.home');
+const profilePage = document.querySelector('.profile');
+const settingsPage = document.querySelector('.configure');
+const profileButtonHero = document.querySelector('.profile-button-hero');
+const fightPage = document.querySelector('.fight-container');
+const logContainer = document.querySelector('.log-container');
+const enemyInputs = document.querySelectorAll('.home-container input');
+const enemyBtn = document.querySelector('.home-button');
+const heroAvatar =document.querySelector('.fight-hero img');
+const loseContainer = document.querySelector('.profile-status-loses-count');
+const winContainer = document.querySelector('.profile-status-wins-count');
+
+const saveName = () => localStorage.setItem('userName-roro', userName);
+const saveHero = () => localStorage.setItem('hero-roro', hero);
+const getName = () => localStorage.getItem('userName-roro') ? localStorage.getItem('userName-roro') : '';
+const getHero = () => localStorage.getItem('hero-roro') ? localStorage.getItem('hero-roro') : heroesArr[0].src;
+const getLoseCounter = () => localStorage.getItem('loseCounter-roro') ? +localStorage.getItem('loseCounter-roro') : 0;
+const getWinCounter = () => localStorage.getItem('winCounter-roro') ? +localStorage.getItem('winCounter-roro') : 0;
+
+let userName = getName();
 let isEdited = false;
 let enemy = '';
-let hero = localStorage.getItem('hero-roro') ? localStorage.getItem('hero-roro') : heroesArr[0].src;
-let loseCounter = localStorage.getItem('loseCounter-roro') ? +localStorage.getItem('loseCounter-roro') : 0;
-let winCounter = localStorage.getItem('winCounter-roro') ? +localStorage.getItem('winCounter-roro') : 0;
+let hero = getHero();
+let loseCounter = getLoseCounter();
+let winCounter = getWinCounter();
 
 function checkedRegistration() {
   if (userName) {
     registrationForm.classList.remove('active');
-    document.querySelector('.profile').classList.add('active');
-    document.querySelectorAll('.profile-status-name').forEach((name) => name.textContent = userName);
-    document.querySelector('.cap').classList.add('active');
+    profilePage.classList.add('active');
+    nameContainers.forEach((name) => name.textContent = userName);
+    capHeader.classList.add('active');
     userAvatar.src = hero;
-    document.querySelector('.fight-hero img').src = hero;
-    document.querySelector('.profile-status-loses-count').textContent = loseCounter;
-    document.querySelector('.profile-status-wins-count').textContent = winCounter;
+    heroAvatar.src = hero;
+    loseContainer.textContent = loseCounter;
+    winContainer.textContent = winCounter;
 
   }
 }
@@ -34,24 +60,24 @@ registrationButton.addEventListener('click', (e) => {
   e.preventDefault();
   userName = registrationNameInput.value;
   registrationForm.classList.remove('active');
-  document.querySelector('.profile').classList.add('active');
-  document.querySelectorAll('.profile-status-name').forEach((name) => name.textContent = userName);
-  document.querySelector('.cap').classList.add('active');
-  localStorage.setItem('userName-roro', userName);
-  localStorage.setItem('hero-roro', heroesArr[0].src);
+  profilePage.classList.add('active');
+  nameContainers.forEach((name) => name.textContent = userName);
+  capHeader.classList.add('active');
+  saveName();
+  saveHero();
 });
 
 editNameButton.addEventListener('click', () => {
   const input = document.querySelector('.configure-content');
-  const nameContainers = document.querySelectorAll('.profile-status-name');
   const nameContainer = document.querySelector('.configure-name');
   if (isEdited && input.value && input.value.trim() !== '') {
+    userName = input.value;
     editNameButton.textContent = 'Edit';
     input.classList.remove('active');
     nameContainer.classList.add('active');
-    nameContainers.forEach((name) => name.textContent = input.value);
+    nameContainers.forEach((name) => name.textContent = userName);
+    saveName();
     isEdited = false;
-
   } else if (!isEdited) {
     editNameButton.textContent = 'Save';
     input.value = nameContainer.textContent;
@@ -62,42 +88,26 @@ editNameButton.addEventListener('click', () => {
   }
 })
 
-const homePageBtn = document.querySelector('.cap-svg-home');
-const profilePageBtn = document.querySelector('.cap-svg-profile');
-const settingsPageBtn = document.querySelector('.cap-svg-setings');
-
-const homePage = document.querySelector('.home');
-const profilePage = document.querySelector('.profile');
-const settingsPage = document.querySelector('.configure');
-const profileButtonHero = document.querySelector('.profile-button-hero');
-const fightPage = document.querySelector('.fight-container');
-const logContainer = document.querySelector('.log-container');
-const enemyInputs = document.querySelectorAll('.home-container input');
-const enemyBtn = document.querySelector('.home-button');
-
 homePageBtn.addEventListener('click', () => {
+  hidePages();
   homePage.classList.add('active');
-  profilePage.classList.remove('active');
-  settingsPage.classList.remove('active');
-  fightPage.classList.remove('active');
-  logContainer.classList.remove('active');
 });
 
 profilePageBtn.addEventListener('click', () => {
+  hidePages();
   profilePage.classList.add('active');
-  homePage.classList.remove('active');
-  settingsPage.classList.remove('active');
-  fightPage.classList.remove('active');
-  logContainer.classList.remove('active');
 });
 
 settingsPageBtn.addEventListener('click', () => {
+  hidePages();
   settingsPage.classList.add('active');
-  homePage.classList.remove('active');
-  profilePage.classList.remove('active');
-  fightPage.classList.remove('active');
-  logContainer.classList.remove('active');
 });
+
+function hidePages() {
+  pages.forEach((page) => {
+    page.classList.remove('active');
+  });
+}
 
 profileButtonHero.addEventListener('click', () => {
   profileHeroes.classList.toggle('active');
@@ -107,14 +117,10 @@ heroesArr.forEach((avatar) => {
   avatar.addEventListener('click', () => {
     hero = avatar.src;
     userAvatar.src = hero;
-    document.querySelector('.fight-hero img').src = hero;
-    localStorage.setItem('hero-roro', hero);
+    heroAvatar.src = hero;
+    saveHero();
   });
 });
-
-
-
-
 
 enemyBtn.addEventListener('click', () => {
   enemyInputs.forEach((input) => {
@@ -138,11 +144,11 @@ const fightButton = document.getElementById('fight-button');
 const resetButton = document.getElementById('reset-button');
 const attackInputs = document.querySelectorAll('input[name="hero-attack"]');
 const defenceInputs = document.querySelectorAll('input[name="hero-defence"]');
-const battleLog = document.getElementById('battle-log');
+const battleLog = document.querySelector('#battle-log');
 
 let heroHp = 5;
 let enemyHp = 5;
-const maxDamage = 1;
+const damage = 1;
 
 function updateFightButton() {
   const selectedAttack = document.querySelector('input[name="hero-attack"]:checked');
@@ -200,16 +206,16 @@ function fight() {
 
 if (typeof enemyActions.defence === 'string') {
     if (heroAttack !== enemyActions.defence) {
-        enemyHp -= maxDamage;
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${maxDamage} damage.`, 'hero-action');
+        enemyHp -= damage;
+        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${damage} damage.`, 'hero-action');
     } else {
         logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
     }
 } else {
     
     if (!enemyActions.defence.includes(heroAttack)) {
-        enemyHp -= maxDamage;
-        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${maxDamage} damage.`, 'hero-action');
+        enemyHp -= damage;
+        logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)} and applied ${damage} damage.`, 'hero-action');
     } else {
         logAction(`HERO attacked the ENEMY in ${translateZone(heroAttack)}, but the ENEMY protected this area. Damage: 0.`, 'hero-action');
     }
@@ -218,8 +224,8 @@ if (typeof enemyActions.defence === 'string') {
 const enemyAttacks = Array.isArray(enemyActions.attack) ? enemyActions.attack : [enemyActions.attack];
 enemyAttacks.forEach(enemyAttackZone => {
     if (!heroDefence.includes(enemyAttackZone)) {
-        heroHp -= maxDamage;
-        logAction(`The ENEMY attacked the HERO in ${translateZone(enemyAttackZone)} and applied ${maxDamage} damage.`, 'enemy-action');
+        heroHp -= damage;
+        logAction(`The ENEMY attacked the HERO in ${translateZone(enemyAttackZone)} and applied ${damage} damage.`, 'enemy-action');
     } else {
         logAction(`The ENEMY attacked the HERO in ${translateZone(enemyAttackZone)}, but the HERO protected this area. Damage: 0.`, 'enemy-action');
     }
@@ -229,20 +235,26 @@ enemyAttacks.forEach(enemyAttackZone => {
   enemyHpEl.textContent = `HP: ${enemyHp}`;
   if (heroHp === 0) {
       logAction('--- You lost! ---', 'end-game');
-      fightButton.disabled = true;
       loseCounter += 1;
-      document.querySelector('.profile-status-loses-count').textContent = loseCounter;
-      saveGameStat();
+      updateGameStat();
   } else if (enemyHp === 0) {
       logAction('--- You won! ---', 'end-game');
-      fightButton.disabled = true;
       winCounter += 1;
-      document.querySelector('.profile-status-wins-count').textContent = winCounter;
-      saveGameStat();
+      updateGameStat();
   }
+  resetFightInputs();
+}
+
+function resetFightInputs() {
   attackInputs.forEach(input => input.checked = false);
   defenceInputs.forEach(input => input.checked = false);
   updateFightButton();
+}
+
+function updateGameStat() {
+  loseContainer.textContent = loseCounter;
+  winContainer.textContent = winCounter;
+  saveGameStat();
 }
 
 function saveGameStat() {
@@ -259,27 +271,10 @@ function resetFight() {
 
   battleLog.innerHTML = '';
   
-  fightButton.disabled = false;
-
-  attackInputs.forEach(input => input.checked = false);
-  defenceInputs.forEach(input => input.checked = false);
-  
-  updateFightButton();
+  resetFightInputs();
   
   logAction('--- New game ---', 'end-game');
 }
 
-
-function translateZone(zone) {
-  const translations = {
-      'head': 'голову',
-      'body': 'тело',
-      'legs': 'ноги'
-  };
-  return translations[zone];
-}
-
 fightButton.addEventListener('click', fight);
-updateFightButton(); 
 resetButton.addEventListener('click', resetFight);
-updateFightButton();
